@@ -1,27 +1,38 @@
-# PetTagsNgrx
+# Custom Pet Tags
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1.
+## 环境
+系统：Mac 10.11.4 (15E65)
+nodeJS: v8.9.3
+npm: 5.6.0
+angular: 5.1.2
+angular/cli: 1.6.1 
+ngrx: 4.1.1 
 
-## Development server
+## 是什么？
+参照https://auth0.com/blog/managing-state-in-angular-with-ngrx-store/ 一步一步尝试ngrx使用的示例，因为版本原因，解决了以下几个问题。
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 解决问题
+* 启用ngrx，需要在app.module imports中增加StoreModule.provideStore({ petTag: petTagReducer })
+因为版本原因，导致这一句报错提示StoreModule中不存在provideStore，需要修改为：StoreModule.forRoot({ petTag: petTagReducer })
 
-## Code scaffolding
+* Property 'payload' does not exist on type 'Actions'.
+https://github.com/ngrx/platform/issues/31
+大体意思貌似是，Action接口中删除了payload属性
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Can't bind to 'ngModel' since it isn't a known property of 'input'.
+https://stackoverflow.com/questions/38892771/cant-bind-to-ngmodel-since-it-isnt-a-known-property-of-input
+需要导入FormsModule，可能是angular版本原因
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+* Chrome ngrx调试时，需要在app.module imports中增加StoreDevtoolsModule.instrumentOnlyWithExtension()
+这一句有点过时，会报错，提示说StoreDevtoolsModule中没有instrumentOnlyWithExtension()，需要修改为：StoreDevtoolsModule.instrument({ maxAge: 50 })
 
-## Running unit tests
+* ERROR in src/app/app.module.ts(5,30): error TS2307: Cannot find module './app.component'.
+src/app/pages/complete/complete.component.ts(18,35): error TS2345: Argument of type '"petTag"' is not assignable to parameter of type '"font" | "text" | "complete" | "shape" | "clip" | "gems"'.
+src/app/pages/create/create.component.ts(19,35): error TS2345: Argument of type '"petTag"' is not assignable to parameter of type '"font" | "text" | "complete" | "shape" | "clip" | "gems"'.
+store.select('petTag') 这一句仍然报上述错误，尚未解决。
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* 如何mac终端中启动vscode打开文件
+https://q.cnblogs.com/q/DetailPage/100818/
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Chrome调试截图
