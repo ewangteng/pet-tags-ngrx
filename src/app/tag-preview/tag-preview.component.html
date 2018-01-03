@@ -1,0 +1,17 @@
+<div *ngIf="petTag.shape" class="row tagView-wrapper">
+
+  <div class="col-sm-12">
+    <div class="tagView {{petTag.shape}}">
+      <img [src]="imgSrc" />
+      <div class="text {{petTag.font}}">
+        {{petTag.text}}
+      </div>
+    </div>
+
+    <p class="text-center">
+      <strong>Tag clip:</strong> {{tagClipText}}<br>
+      <strong>Gems:</strong> {{gemsText}}
+    </p>
+  </div>
+
+</div>

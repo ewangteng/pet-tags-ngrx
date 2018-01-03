@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  margin: 20px 0;
+}
+.tagShape {
+  padding: 10px;
+  text-align: center;
+}
+img {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-height: 50px;
+  max-width: 100%;
+  width: auto;
+}

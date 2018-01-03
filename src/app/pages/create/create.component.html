@@ -1,0 +1,33 @@
+<p class="col-sm-12 text-center lead">
+  Hello! Create a customized tag for your pet.
+</p>
+
+<app-tag-shape
+  (selectShapeEvent)="selectShapeHandler($event)"></app-tag-shape>
+<app-tag-text
+  *ngIf="petTag.shape"
+  (selectFontEvent)="selectFontHandler($event)"
+  (addTextEvent)="addTextHandler($event)"></app-tag-text>
+<app-tag-extras
+  *ngIf="petTag.shape"
+  (toggleClipEvent)="toggleClipHandler()"
+  (toggleGemsEvent)="toggleGemsHandler()"></app-tag-extras>
+<app-tag-preview
+  [petTag]="petTag"></app-tag-preview>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <p class="form-text text-muted" *ngIf="petTag.shape">
+      Preview your customized tag above.<br>
+      If you're happy with the results,<br>
+      click the button below to finish!
+    </p>
+    <p>
+      <button
+        class="btn btn-success btn-lg"
+        *ngIf="petTag.shape"
+        [disabled]="!done"
+        (click)="submit()"
+        routerLink="/complete">Done</button>
+    </p>
+  </div>
+</div>
