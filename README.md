@@ -35,3 +35,4 @@ src/app/pages/create/create.component.ts(19,35): error TS2345: Argument of type 
 > https://q.cnblogs.com/q/DetailPage/100818/
 
 ## Chrome调试截图
+![image](https://github.com/ewangteng/pet-tags-ngrx/blob/origin/master/screenshots/1.pic_hd.jpg)
